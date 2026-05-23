@@ -461,8 +461,8 @@ button {
   justify-content: center;
   align-self: stretch;
   min-width: 3rem;
-  border-left: 1px solid rgba(246, 241, 232, 0.22);
-  background: rgba(47, 47, 43, 0.08);
+  border-left: 1px solid rgba(47, 47, 43, 0.12);
+  background: rgba(47, 47, 43, 0.06);
 }
 
 .button--solid:hover,
@@ -535,7 +535,7 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: 68% 50%;
-  filter: saturate(0.88) sepia(0.08) contrast(0.96) brightness(0.98);
+  filter: none;
   transform: scale(1.04);
 }
 
@@ -575,7 +575,7 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.92) sepia(0.06) contrast(0.97) brightness(0.99);
+  filter: none;
 }
 
 .featured-tile__image,
@@ -603,7 +603,7 @@ button {
 
 .page-banner__portrait {
   object-position: center 25%;
-  filter: sepia(0.12) saturate(0.72) contrast(0.94) brightness(1.02);
+  filter: none;
 }
 
 .content-section {
@@ -1184,6 +1184,21 @@ button {
   aspect-ratio: 1.4;
 }
 
+.gallery-card__trigger,
+.project-sheet__hero-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: zoom-in;
+}
+
+.gallery-card__trigger {
+  text-align: inherit;
+}
+
 .gallery-card figcaption {
   padding: 1rem 1.15rem 1.2rem;
   color: var(--muted);
@@ -1205,6 +1220,217 @@ button {
 .reflection-card__body {
   font-size: 1.12rem;
   line-height: 1.92;
+}
+
+.project-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgba(33, 30, 25, 0.78);
+  backdrop-filter: blur(8px);
+}
+
+.project-lightbox__panel {
+  position: relative;
+  display: grid;
+  isolation: isolate;
+  gap: 1rem;
+  width: min(100%, 82rem);
+  height: min(56rem, calc(100dvh - 3rem));
+  max-height: calc(100dvh - 3rem);
+  padding: 1.15rem 1.15rem 1rem;
+  border: 1px solid rgba(246, 241, 232, 0.14);
+  border-radius: 24px;
+  background: rgba(246, 241, 232, 0.96);
+  box-shadow: 0 24px 50px rgba(20, 18, 16, 0.28);
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.project-lightbox__viewport {
+  position: relative;
+  z-index: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  padding: 1.25rem 3.7rem 0.35rem;
+}
+
+.project-lightbox__media {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  transform: scale(var(--lightbox-zoom, 1));
+  transform-origin: center center;
+  transition: transform var(--transition);
+}
+
+.project-lightbox__image-button {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.project-lightbox__image-button[aria-label='Reset image zoom'] {
+  cursor: zoom-out;
+}
+
+.project-lightbox__image-shell {
+  display: grid;
+  place-items: center;
+  width: min(100%, 72rem);
+  height: min(100%, 72vh);
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 18px;
+  box-shadow: 0 16px 34px rgba(47, 47, 43, 0.16);
+  background: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+
+.project-lightbox__image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.project-lightbox__image-button:focus-visible {
+  outline: 2px solid rgba(127, 146, 117, 0.48);
+  outline-offset: 6px;
+}
+
+.project-lightbox__close,
+.project-lightbox__nav,
+.project-lightbox__control {
+  border: 1px solid rgba(47, 47, 43, 0.12);
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--text);
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+.project-lightbox__close,
+.project-lightbox__nav {
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: 999px;
+}
+
+.project-lightbox__close {
+  top: 0.9rem;
+  right: 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-lightbox__nav {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.project-lightbox__nav--prev {
+  left: 1rem;
+}
+
+.project-lightbox__nav--next {
+  right: 1rem;
+}
+
+.project-lightbox__footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem 1.25rem;
+  padding: 0 0.25rem 0.2rem;
+}
+
+.project-lightbox__meta {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.project-lightbox__meta .eyebrow {
+  margin: 0;
+}
+
+.project-lightbox__caption {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  line-height: 1.18;
+  color: var(--text);
+}
+
+.project-lightbox__controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.project-lightbox__control {
+  min-width: 2.8rem;
+  min-height: 2.8rem;
+  padding: 0 0.8rem;
+  border-radius: 999px;
+  font-size: 1.18rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.project-lightbox__control--label {
+  min-width: 4.2rem;
+  font-size: 0.92rem;
+}
+
+.project-lightbox__close:hover,
+.project-lightbox__close:focus-visible,
+.project-lightbox__nav:hover,
+.project-lightbox__nav:focus-visible,
+.project-lightbox__control:hover,
+.project-lightbox__control:focus-visible {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(127, 146, 117, 0.34);
+  color: var(--olive-deep);
+  transform: translateY(-1px);
+}
+
+.project-lightbox__nav:hover,
+.project-lightbox__nav:focus-visible {
+  transform: translateY(-50%) scale(1.02);
+}
+
+.project-lightbox__control:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .contact-layout {
@@ -1357,7 +1583,7 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: 62% center;
-  filter: saturate(0.88) sepia(0.08) contrast(0.96) brightness(0.98);
+  filter: none;
   transform: scale(1.06);
 }
 
@@ -1491,7 +1717,7 @@ button {
 
 .hero__photo--home {
   object-position: 60% 50%;
-  filter: saturate(0.94) sepia(0.04) contrast(0.98) brightness(0.99);
+  filter: none;
   backface-visibility: hidden;
   transform: translateZ(0) scale(1.02);
   -webkit-mask-image: linear-gradient(
@@ -1850,7 +2076,7 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  filter: saturate(0.96) sepia(0.04) contrast(0.98) brightness(1);
+  filter: none;
 }
 
 .project-sheet__thumbs {
@@ -2060,7 +2286,7 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  filter: saturate(0.92) sepia(0.06) contrast(0.97) brightness(0.99);
+  filter: none;
   backface-visibility: hidden;
   transform: translateZ(0) scale(1.02);
 }
@@ -2142,11 +2368,12 @@ button {
 }
 
 .footer-nav {
-  display: grid;
-  justify-items: end;
-  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
   align-self: center;
-  gap: 0.15rem;
+  gap: 0.2rem;
 }
 
 @keyframes fade-up {
@@ -2283,6 +2510,47 @@ button {
     display: none;
   }
 
+  .project-lightbox {
+    padding: 0.8rem;
+  }
+
+  .project-lightbox__panel {
+    width: 100%;
+    height: calc(100dvh - 1.6rem);
+    max-height: calc(100dvh - 1.6rem);
+    padding: 3.15rem 0.8rem 0.85rem;
+    gap: 0.7rem;
+    border-radius: 20px;
+  }
+
+  .project-lightbox__viewport {
+    padding: 0.25rem 0 0;
+  }
+
+  .project-lightbox__nav {
+    top: auto;
+    bottom: 4.9rem;
+    transform: none;
+  }
+
+  .project-lightbox__nav--prev {
+    left: 0.8rem;
+  }
+
+  .project-lightbox__nav--next {
+    right: 0.8rem;
+  }
+
+  .project-lightbox__footer {
+    align-items: start;
+    padding: 0;
+  }
+
+  .project-lightbox__controls {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
   .nav-toggle {
     display: inline-flex;
   }
@@ -2341,7 +2609,10 @@ button {
   }
 
   .footer-nav {
-    justify-items: start;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.15rem;
   }
 
   .meta-grid,
@@ -2430,6 +2701,22 @@ button {
 
   .contact-sidebar--sheet .section-title {
     font-size: clamp(2.25rem, 10.4vw, 3rem);
+  }
+
+  .project-lightbox__close,
+  .project-lightbox__nav {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .project-lightbox__caption {
+    font-size: 1.08rem;
+  }
+
+  .project-lightbox__control {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    padding: 0 0.7rem;
   }
 
   .about-hero__title,

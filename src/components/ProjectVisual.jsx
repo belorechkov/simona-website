@@ -741,14 +741,19 @@ function PortraitVariant({ colors, gradientId }) {
   );
 }
 
-export default function ProjectVisual({ theme = 'terrace', title, variant = 'hero' }) {
+export default function ProjectVisual({
+  className = '',
+  theme = 'terrace',
+  title,
+  variant = 'hero',
+}) {
   const colorSet = themeMap[theme] ?? themeMap.terrace;
   const gradientId = useId().replace(/:/g, '-');
 
   return (
     <svg
       aria-label={title}
-      className="project-visual"
+      className={['project-visual', className].filter(Boolean).join(' ')}
       role="img"
       viewBox="0 0 1600 1000"
       xmlns="http://www.w3.org/2000/svg"
