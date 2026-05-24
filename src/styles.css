@@ -606,9 +606,9 @@ button {
   filter: none;
 }
 
-.content-section {
+/* .content-section {
   margin-top: 5rem;
-}
+} */
 
 .content-section--tight {
   margin-top: 1rem;
@@ -2505,6 +2505,19 @@ button {
 }
 
 @media (max-width: 780px) {
+  .hero-stage {
+    margin-left: 0;
+    min-width: 100%;
+    min-height: 22rem;
+  }
+
+  .hero__photo--home {
+    object-position: center center;
+    transform: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
   .contact-sidebar--sheet::after {
     display: none;
   }
