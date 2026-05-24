@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import ProjectVisual from '../components/ProjectVisual';
 import { getProjectBySlug, projects } from '../data/projects';
@@ -45,9 +45,27 @@ function ProjectFactList({ project }) {
   );
 }
 
-function ProjectVisualFrame({ project, variant, alt, className }) {
+function ProjectVisualFrame({
+  project,
+  variant,
+  alt,
+  className,
+  decoding = 'auto',
+  fetchPriority,
+  loading = 'eager',
+}) {
   if (variant === 'hero' && project.heroImage) {
-    return <img alt={alt} className={className} src={project.heroImage} />;
+    return (
+      <img
+        alt={alt}
+        className={className}
+        decoding={decoding}
+        draggable={false}
+        fetchPriority={fetchPriority}
+        loading={loading}
+        src={project.heroImage}
+      />
+    );
   }
 
   return (
@@ -69,17 +87,68 @@ function ProjectLightbox({
   project,
 }) {
   const [zoomLevel, setZoomLevel] = useState(1);
+  const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
   const maxZoomLevel = 2.5;
+  const viewportRef = useRef(null);
+  const imageShellRef = useRef(null);
+  const dragStateRef = useRef({
+    active: false,
+    moved: false,
+    originX: 0,
+    originY: 0,
+    pointerId: null,
+    startX: 0,
+    startY: 0,
+  });
+  const suppressClickRef = useRef(false);
+
+  function getPanBounds(nextZoom = zoomLevel) {
+    const viewport = viewportRef.current;
+    const imageShell = imageShellRef.current;
+
+    if (!viewport || !imageShell || nextZoom <= 1) {
+      return { x: 0, y: 0 };
+    }
+
+    const viewportWidth = viewport.clientWidth;
+    const viewportHeight = viewport.clientHeight;
+    const imageWidth = imageShell.offsetWidth;
+    const imageHeight = imageShell.offsetHeight;
+
+    return {
+      x: Math.max(0, (imageWidth * nextZoom - viewportWidth) / 2),
+      y: Math.max(0, (imageHeight * nextZoom - viewportHeight) / 2),
+    };
+  }
+
+  function clampPan(nextPan, nextZoom = zoomLevel) {
+    const bounds = getPanBounds(nextZoom);
+
+    return {
+      x: Math.min(bounds.x, Math.max(-bounds.x, nextPan.x)),
+      y: Math.min(bounds.y, Math.max(-bounds.y, nextPan.y)),
+    };
+  }
 
   function increaseZoom(step = 0.25) {
-    setZoomLevel((current) => Math.min(maxZoomLevel, Number((current + step).toFixed(2))));
+    setZoomLevel((current) =>
+      Math.min(maxZoomLevel, Number((current + step).toFixed(2))),
+    );
   }
 
   function decreaseZoom(step = 0.25) {
-    setZoomLevel((current) => Math.max(1, Number((current - step).toFixed(2))));
+    setZoomLevel((current) =>
+      Math.max(1, Number((current - step).toFixed(2))),
+    );
   }
 
   function handleImageClick() {
+    if (suppressClickRef.current) {
+      suppressClickRef.current = false;
+      return;
+    }
+
     if (zoomLevel >= maxZoomLevel) {
       setZoomLevel(1);
       return;
@@ -90,6 +159,7 @@ function ProjectLightbox({
 
   useEffect(() => {
     setZoomLevel(1);
+    setPanOffset({ x: 0, y: 0 });
   }, [activeIndex]);
 
   useEffect(() => {
@@ -125,6 +195,99 @@ function ProjectLightbox({
     };
   }, [items.length, maxZoomLevel, onClose, onNext, onPrevious, zoomLevel]);
 
+  useEffect(() => {
+    function handleResize() {
+      setPanOffset((current) => clampPan(current));
+    }
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [zoomLevel]);
+
+  useEffect(() => {
+    if (zoomLevel <= 1) {
+      setPanOffset({ x: 0, y: 0 });
+      return;
+    }
+
+    setPanOffset((current) => clampPan(current));
+  }, [zoomLevel]);
+
+  function endDrag(event) {
+    const dragState = dragStateRef.current;
+
+    if (!dragState.active || dragState.pointerId !== event.pointerId) {
+      return;
+    }
+
+    if (event.currentTarget.releasePointerCapture) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    suppressClickRef.current = dragState.moved;
+    dragStateRef.current = {
+      active: false,
+      moved: false,
+      originX: 0,
+      originY: 0,
+      pointerId: null,
+      startX: 0,
+      startY: 0,
+    };
+    setIsDragging(false);
+  }
+
+  function handlePointerDown(event) {
+    if (zoomLevel <= 1) {
+      return;
+    }
+
+    dragStateRef.current = {
+      active: true,
+      moved: false,
+      originX: panOffset.x,
+      originY: panOffset.y,
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+    };
+
+    if (event.currentTarget.setPointerCapture) {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
+
+    setIsDragging(true);
+  }
+
+  function handlePointerMove(event) {
+    const dragState = dragStateRef.current;
+
+    if (!dragState.active || dragState.pointerId !== event.pointerId) {
+      return;
+    }
+
+    const deltaX = event.clientX - dragState.startX;
+    const deltaY = event.clientY - dragState.startY;
+
+    if (!dragState.moved && (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3)) {
+      dragStateRef.current = {
+        ...dragState,
+        moved: true,
+      };
+    }
+
+    setPanOffset(
+      clampPan({
+        x: dragState.originX + deltaX,
+        y: dragState.originY + deltaY,
+      }),
+    );
+  }
+
   const activeItem = items[activeIndex];
 
   return (
@@ -158,25 +321,37 @@ function ProjectLightbox({
           </button>
         ) : null}
 
-        <div className="project-lightbox__viewport">
-          <div
-            className="project-lightbox__media"
-            style={{ '--lightbox-zoom': zoomLevel }}
-          >
+        <div className="project-lightbox__viewport" ref={viewportRef}>
+          <div className="project-lightbox__media">
             <button
               aria-label={
                 zoomLevel >= maxZoomLevel
                   ? 'Reset image zoom'
                   : 'Zoom further into image'
               }
-              className="project-lightbox__image-button"
+              className={`project-lightbox__image-button ${
+                zoomLevel > 1 ? 'is-pannable' : ''
+              } ${isDragging ? 'is-dragging' : ''}`}
               onClick={handleImageClick}
+              onPointerCancel={endDrag}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={endDrag}
               type="button"
             >
-              <div className="project-lightbox__image-shell">
+              <div
+                className="project-lightbox__image-shell"
+                ref={imageShellRef}
+                style={{
+                  '--lightbox-pan-x': `${panOffset.x}px`,
+                  '--lightbox-pan-y': `${panOffset.y}px`,
+                  '--lightbox-zoom': zoomLevel,
+                }}
+              >
                 <ProjectVisualFrame
                   alt={`${project.title} enlarged visual`}
                   className="project-lightbox__image"
+                  decoding="async"
                   project={project}
                   variant={activeItem.variant}
                 />
@@ -303,6 +478,9 @@ export default function ProjectPage() {
               <ProjectVisualFrame
                 alt={project.title}
                 className="project-page-hero__image"
+                decoding="async"
+                fetchPriority="high"
+                loading="eager"
                 project={project}
                 variant="hero"
               />
@@ -345,6 +523,8 @@ export default function ProjectPage() {
                   <ProjectVisualFrame
                     alt={`${project.title} ${item.variant} visual`}
                     className="gallery-card__image"
+                    decoding="async"
+                    loading="lazy"
                     project={project}
                     variant={item.variant}
                   />

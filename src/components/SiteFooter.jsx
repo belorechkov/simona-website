@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { siteMeta } from '../data/siteContent';
 
 const navigation = [
@@ -60,7 +60,7 @@ export default function SiteFooter() {
               <circle cx="16.9" cy="7.1" fill="currentColor" r="1.15" />
             </svg>
           </a>
-          <a aria-label="Contact page" className="footer-social-link" href="/contact">
+          <Link aria-label="Contact page" className="footer-social-link" to="/contact">
             <svg
               aria-hidden="true"
               fill="none"
@@ -84,7 +84,7 @@ export default function SiteFooter() {
                 strokeWidth="1.6"
               />
             </svg>
-          </a>
+          </Link>
         </div>
 
         <nav aria-label="Footer" className="footer-nav">

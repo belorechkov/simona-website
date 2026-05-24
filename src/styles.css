@@ -1265,9 +1265,6 @@ button {
   width: 100%;
   height: 100%;
   min-height: 0;
-  transform: scale(var(--lightbox-zoom, 1));
-  transform-origin: center center;
-  transition: transform var(--transition);
 }
 
 .project-lightbox__image-button {
@@ -1280,6 +1277,15 @@ button {
   border: none;
   background: transparent;
   cursor: zoom-in;
+}
+
+.project-lightbox__image-button.is-pannable {
+  cursor: grab;
+  touch-action: none;
+}
+
+.project-lightbox__image-button.is-dragging {
+  cursor: grabbing;
 }
 
 .project-lightbox__image-button[aria-label='Reset image zoom'] {
@@ -1297,6 +1303,15 @@ button {
   box-shadow: 0 16px 34px rgba(47, 47, 43, 0.16);
   background: rgba(255, 255, 255, 0.5);
   overflow: hidden;
+  transform: translate3d(var(--lightbox-pan-x, 0), var(--lightbox-pan-y, 0), 0)
+    scale(var(--lightbox-zoom, 1));
+  transform-origin: center center;
+  transition: transform var(--transition);
+  will-change: transform;
+}
+
+.project-lightbox__image-button.is-dragging .project-lightbox__image-shell {
+  transition: none;
 }
 
 .project-lightbox__image {
@@ -1569,22 +1584,6 @@ button {
   color: var(--muted);
   font-size: 0.84rem;
   line-height: 1.6;
-}
-
-.contact-stage__visual {
-  position: relative;
-  min-height: 27.5rem;
-  background: var(--surface-strong);
-  margin-top: 0.1rem;
-}
-
-.contact-stage__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 62% center;
-  filter: none;
-  transform: scale(1.06);
 }
 
 .page-frame--home::before,

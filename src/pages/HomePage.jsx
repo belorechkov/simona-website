@@ -61,7 +61,7 @@ export default function HomePage() {
                   <circle cx="16.9" cy="7.1" fill="currentColor" r="1.15" />
                 </svg>
               </a>
-              <a aria-label="Contact page" className="hero__social-link" href="/contact">
+              <Link aria-label="Contact page" className="hero__social-link" to="/contact">
                 <svg
                   aria-hidden="true"
                   fill="none"
@@ -85,7 +85,7 @@ export default function HomePage() {
                     strokeWidth="1.6"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -95,6 +95,9 @@ export default function HomePage() {
               <img
                 alt=""
                 className="hero__photo hero__photo--home"
+                decoding="async"
+                fetchPriority="high"
+                loading="eager"
                 src={siteMeta.heroImage}
               />
             </div>
@@ -117,6 +120,8 @@ export default function HomePage() {
                     <img
                       alt={project.title}
                       className="featured-tile__image"
+                      decoding="async"
+                      loading="lazy"
                       src={project.image ?? project.heroImage}
                     />
                   ) : (
