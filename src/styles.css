@@ -606,9 +606,9 @@ button {
   filter: none;
 }
 
-/* .content-section {
-  margin-top: 5rem;
-} */
+.content-section {
+  margin-top: 2rem;
+}
 
 .content-section--tight {
   margin-top: 1rem;
