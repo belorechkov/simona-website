@@ -52,7 +52,6 @@ function ProjectVisualFrame({
   className,
   decoding = 'auto',
   fetchPriority,
-  loading = 'eager',
 }) {
   if (variant === 'hero' && project.heroImage) {
     return (
@@ -62,7 +61,6 @@ function ProjectVisualFrame({
         decoding={decoding}
         draggable={false}
         fetchPriority={fetchPriority}
-        loading={loading}
         src={project.heroImage}
       />
     );
@@ -480,7 +478,6 @@ export default function ProjectPage() {
                 className="project-page-hero__image"
                 decoding="async"
                 fetchPriority="high"
-                loading="eager"
                 project={project}
                 variant="hero"
               />
@@ -524,7 +521,6 @@ export default function ProjectPage() {
                     alt={`${project.title} ${item.variant} visual`}
                     className="gallery-card__image"
                     decoding="async"
-                    loading="lazy"
                     project={project}
                     variant={item.variant}
                   />

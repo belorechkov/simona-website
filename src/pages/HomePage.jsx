@@ -97,7 +97,6 @@ export default function HomePage() {
                 className="hero__photo hero__photo--home"
                 decoding="async"
                 fetchPriority="high"
-                loading="eager"
                 src={siteMeta.heroImage}
               />
             </div>
@@ -121,7 +120,6 @@ export default function HomePage() {
                       alt={project.title}
                       className="featured-tile__image"
                       decoding="async"
-                      loading="lazy"
                       src={project.image ?? project.heroImage}
                     />
                   ) : (

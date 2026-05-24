@@ -247,7 +247,6 @@ export default function ContactPage() {
               alt={siteMeta.contactImageAlt}
               className="contact-stage__image"
               decoding="async"
-              loading="eager"
               src={siteMeta.contactImage}
             />
           </div>

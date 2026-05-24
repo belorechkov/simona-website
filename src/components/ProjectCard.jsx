@@ -15,7 +15,6 @@ export default function ProjectCard({ project, featured = false }) {
               alt={project.title}
               className="project-card__image"
               decoding="async"
-              loading="lazy"
               src={project.image}
             />
           ) : (

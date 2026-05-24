@@ -123,7 +123,6 @@ export default function AboutPage() {
                 alt={siteMeta.aboutPortraitAlt}
                 className="page-banner__portrait"
                 decoding="async"
-                loading="eager"
                 src={siteMeta.aboutPortraitImage}
               />
             </div>
