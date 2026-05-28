@@ -6,7 +6,12 @@ const initialFormData = {
   email: '',
   subject: '',
   message: '',
+  'bot-field': '',
 };
+
+function encodeFormData(data) {
+  return new URLSearchParams(data).toString();
+}
 
 const contactItems = [
   {
@@ -108,31 +113,46 @@ function ContactIcon({ type }) {
 
 export default function ContactPage() {
   const [formData, setFormData] = useState(initialFormData);
+  const [submitState, setSubmitState] = useState('idle');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
+    setSubmitState('idle');
     setFormData((current) => ({
       ...current,
       [name]: value,
     }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitState('idle');
 
-    const lines = [
-      `Name: ${formData.name}`,
-      `Email: ${formData.email}`,
-      '',
-      formData.message,
-    ];
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: encodeFormData({
+          'form-name': 'contact',
+          ...formData,
+        }),
+      });
 
-    const mailtoUrl =
-      `mailto:${siteMeta.contactEmail}` +
-      `?subject=${encodeURIComponent(formData.subject)}` +
-      `&body=${encodeURIComponent(lines.join('\n'))}`;
+      if (!response.ok) {
+        throw new Error('Netlify form submission failed.');
+      }
 
-    window.location.href = mailtoUrl;
+      setFormData(initialFormData);
+      setSubmitState('success');
+    } catch (error) {
+      setSubmitState('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -170,7 +190,27 @@ export default function ContactPage() {
           </address>
         </div>
 
-        <form className="contact-form-shell contact-form-shell--reference" onSubmit={handleSubmit}>
+        <form
+          className="contact-form-shell contact-form-shell--reference"
+          data-netlify="true"
+          method="POST"
+          name="contact"
+          netlify-honeypot="bot-field"
+          onSubmit={handleSubmit}
+        >
+          <input name="form-name" type="hidden" value="contact" />
+          <div aria-hidden="true" className="visually-hidden">
+            <label htmlFor="contact-bot-field">Do not fill this out</label>
+            <input
+              id="contact-bot-field"
+              name="bot-field"
+              onChange={handleChange}
+              tabIndex={-1}
+              type="text"
+              value={formData['bot-field']}
+            />
+          </div>
+
           <div className="contact-form-grid">
             <div className="form-field">
               <label className="visually-hidden" htmlFor="contact-name">
@@ -234,10 +274,22 @@ export default function ContactPage() {
           </div>
 
           <div className="contact-form__actions">
-            <button className="button button--solid" type="submit">
-              Send Message
+            <button className="button button--solid" disabled={isSubmitting} type="submit">
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
           </div>
+
+          {submitState === 'success' ? (
+            <p className="contact-form__status contact-form__status--success" role="status">
+              Message sent successfully. I&apos;ll get back to you by email.
+            </p>
+          ) : null}
+
+          {submitState === 'error' ? (
+            <p className="contact-form__status contact-form__status--error" role="alert">
+              Something went wrong while sending your message. Please try again.
+            </p>
+          ) : null}
         </form>
 
         <div className="contact-stage" aria-hidden="true">

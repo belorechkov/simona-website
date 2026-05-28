@@ -2,7 +2,7 @@ export const siteMeta = {
   name: 'Simona Taseva',
   subtitle: 'Architect | Sustainable Architecture & Urban Research',
   intro:
-    'I design sustainable, climate-adaptive environments that connect architecture, ecology, and resilient urban futures.',
+    'I design sustainable, climate-adaptive environments that connect architecture, ecology, and community wellbeing.',
   heroNote:
     'Architecture grounded in research, ecological performance, and thoughtful urban resilience.',
   heroImage: '/images/hero-sustainable-architecture-terrace.png',
@@ -12,7 +12,7 @@ export const siteMeta = {
   aboutPortraitAlt:
     'Portrait placeholder for Simona Taseva.',
   aboutProfile:
-    'I am an architect focused on how buildings, landscapes, and urban systems can work together as living frameworks. My design approach balances spatial clarity with environmental responsibility, combining architecture with research-led thinking.',
+    'I am a Bulgarian architect with experience in academic design projects, professional coordination, and sustainability-oriented architectural work. My interests focus on the relationship between buildings, landscapes, and urban systems, especially in the context of climate adaptation, green infrastructure, and long-term quality of life. I am currently developing my academic direction toward PhD research in sustainable architecture, climate-adaptive design, smart green infrastructure, and urban resilience.',
   aboutAcademic:
     'My academic interests explore how sustainable architecture can respond to climate uncertainty through passive systems, green-blue infrastructure, and adaptable spatial strategies.',
   aboutExperience:
@@ -20,11 +20,11 @@ export const siteMeta = {
   aboutDirection:
     'I am currently shaping a portfolio for PhD applications centered on sustainable architecture, climate-adaptive design, smart green infrastructure, urban resilience, and research-oriented design practice.',
   contactLead:
-    "I'm open to collaborations, research partnerships, and opportunities that create positive impact.",
+    "I am currently open to PhD opportunities related to sustainable architecture, climate-adaptive design, smart green infrastructure, and urban resilience.",
   contactImage: '/images/project-green-community-hub.png',
   contactImageAlt:
     'Courtyard eco building with planting and warm natural light.',
-  contactEmail: 'simona.taseva@gmail.com',
+  contactEmail: 'simona.taseva00@gmail.com',
   contactInstagramUrl: 'https://www.instagram.com/simona.taseva/',
   contactLinkedInLabel: 'linkedin.com/in/simona-taseva',
   contactLinkedInUrl: 'https://www.linkedin.com/in/simona-taseva',

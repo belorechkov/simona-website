@@ -14,7 +14,21 @@
     <title>Simona Taseva | Architecture Portfolio</title>
   </head>
   <body>
+    <form
+      data-netlify="true"
+      hidden
+      name="contact"
+      netlify-honeypot="bot-field"
+      style="display:none"
+    >
+      <input name="form-name" type="hidden" value="contact" />
+      <input name="bot-field" type="text" />
+      <input name="name" type="text" />
+      <input name="email" type="email" />
+      <input name="subject" type="text" />
+      <textarea name="message"></textarea>
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
-  </html>
+</html>
