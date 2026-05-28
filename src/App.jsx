@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
+import { comingSoonConfig } from './config/siteConfig';
 import AboutPage from './pages/AboutPage';
+import ComingSoonPage from './pages/ComingSoonPage';
 import ContactPage from './pages/ContactPage';
 import HomePage from './pages/HomePage';
 import PortfolioPage from './pages/PortfolioPage';
@@ -18,6 +20,10 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  if (comingSoonConfig.enabled) {
+    return <ComingSoonPage />;
+  }
+
   return (
     <Layout>
       <ScrollToTop />

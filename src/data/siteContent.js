@@ -24,7 +24,7 @@ export const siteMeta = {
   contactImage: '/images/project-green-community-hub.png',
   contactImageAlt:
     'Courtyard eco building with planting and warm natural light.',
-  contactEmail: 'simona.taseva00@gmail.com',
+  contactEmail: 'simona.taseva.arch@gmail.com',
   contactInstagramUrl: 'https://www.instagram.com/simona.taseva/',
   contactLinkedInLabel: 'linkedin.com/in/simona-taseva',
   contactLinkedInUrl: 'https://www.linkedin.com/in/simona-taseva',
