@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import ProgressiveImage from './ProgressiveImage';
 import ProjectVisual from './ProjectVisual';
 
 export default function ProjectCard({ project, featured = false }) {
@@ -11,10 +12,11 @@ export default function ProjectCard({ project, featured = false }) {
       >
         <div className="project-card__media">
           {project.image ? (
-            <img
+            <ProgressiveImage
               alt={project.title}
               className="project-card__image"
               decoding="async"
+              loading="lazy"
               src={project.image}
             />
           ) : (

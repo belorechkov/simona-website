@@ -157,6 +157,19 @@ async function getPresentationBoardPath(projectFolder, slug) {
   return outputPath;
 }
 
+function toPlaceholderPath(filePath) {
+  const parsed = path.parse(filePath);
+  return path.join(parsed.dir, `${parsed.name}-placeholder.webp`);
+}
+
+async function generatePlaceholderImage(sourcePath, outputPath) {
+  await sharp(sourcePath)
+    .rotate()
+    .resize({ width: 48, withoutEnlargement: true })
+    .webp({ quality: 58 })
+    .toFile(toPlaceholderPath(outputPath));
+}
+
 async function optimizeImage(sourcePath, outputPath, width, quality) {
   await fs.mkdir(path.dirname(outputPath), { recursive: true });
   await sharp(sourcePath)
@@ -164,6 +177,7 @@ async function optimizeImage(sourcePath, outputPath, width, quality) {
     .resize({ width, withoutEnlargement: true })
     .webp({ quality })
     .toFile(outputPath);
+  await generatePlaceholderImage(sourcePath, outputPath);
 }
 
 async function getProjectImages(projectFolder, slug) {

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import ProgressiveImage from '../components/ProgressiveImage';
 import { comingSoonConfig } from '../config/siteConfig';
 import { siteMeta } from '../data/siteContent';
 
@@ -67,7 +68,7 @@ export default function ComingSoonPage() {
         </div>
 
         <div className="coming-soon__visual" aria-hidden="true">
-          <img alt="" src={siteMeta.heroImage} />
+          <ProgressiveImage alt="" src={siteMeta.heroImage} />
         </div>
       </section>
     </main>

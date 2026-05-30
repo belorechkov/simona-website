@@ -1,3 +1,4 @@
+import ProgressiveImage from '../components/ProgressiveImage';
 import { siteMeta } from '../data/siteContent';
 
 const aboutSections = [
@@ -119,7 +120,7 @@ export default function AboutPage() {
           <div className="about-portrait-stage" aria-hidden="true">
             <div className="about-portrait-stage__backdrop" />
             <div className="about-portrait-stage__frame">
-              <img
+              <ProgressiveImage
                 alt={siteMeta.aboutPortraitAlt}
                 className="page-banner__portrait"
                 decoding="async"

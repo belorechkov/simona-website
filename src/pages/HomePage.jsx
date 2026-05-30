@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import PageIntro from '../components/PageIntro';
+import ProgressiveImage from '../components/ProgressiveImage';
 import ProjectVisual from '../components/ProjectVisual';
 import { getFeaturedProjects } from '../data/projects';
 import { focusPillars, siteMeta } from '../data/siteContent';
@@ -59,18 +60,18 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="hero-stage" aria-hidden="true">
-            <div className="hero-stage__shape" />
-            <div className="hero-stage__frame">
-              <img
-                alt=""
-                className="hero__photo hero__photo--home"
-                decoding="async"
-                fetchPriority="high"
-                src={siteMeta.heroImage}
-              />
+            <div className="hero-stage" aria-hidden="true">
+              <div className="hero-stage__shape" />
+              <div className="hero-stage__frame">
+                <ProgressiveImage
+                  alt=""
+                  className="hero__photo hero__photo--home"
+                  decoding="async"
+                  fetchPriority="high"
+                  src={siteMeta.heroImage}
+                />
+              </div>
             </div>
-          </div>
         </section>
 
         <section className="featured-strip featured-strip--home">
@@ -86,10 +87,11 @@ export default function HomePage() {
               >
                 <div className="featured-tile__visual">
                   {project.image || project.heroImage ? (
-                    <img
+                    <ProgressiveImage
                       alt={project.title}
                       className="featured-tile__image"
                       decoding="async"
+                      loading="lazy"
                       src={project.image ?? project.heroImage}
                     />
                   ) : (

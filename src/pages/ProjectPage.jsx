@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
+import ProgressiveImage from '../components/ProgressiveImage';
 import ProjectVisual from '../components/ProjectVisual';
 import { getProjectBySlug, projects } from '../data/projects';
 
@@ -60,12 +61,13 @@ function ProjectVisualFrame({
 
   if (imageSrc) {
     return (
-      <img
+      <ProgressiveImage
         alt={alt}
         className={className}
         decoding={decoding}
         draggable={false}
         fetchPriority={fetchPriority}
+        loading={fetchPriority === 'high' ? 'eager' : 'lazy'}
         src={imageSrc}
       />
     );

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ProgressiveImage from '../components/ProgressiveImage';
 import { siteMeta } from '../data/siteContent';
 
 const initialFormData = {
@@ -269,7 +270,7 @@ export default function ContactPage() {
         <div className="contact-stage" aria-hidden="true">
           <div className="contact-stage__backdrop" />
           <div className="contact-stage__visual">
-            <img
+            <ProgressiveImage
               alt={siteMeta.contactImageAlt}
               className="contact-stage__image"
               decoding="async"
