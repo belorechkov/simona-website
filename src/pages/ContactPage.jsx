@@ -22,13 +22,6 @@ const contactItems = [
     external: true,
   },
   {
-    label: 'Instagram',
-    value: 'instagram.com/simona.taseva',
-    href: siteMeta.contactInstagramUrl,
-    icon: 'instagram',
-    external: true,
-  },
-  {
     label: 'Email',
     value: siteMeta.contactEmail,
     href: `mailto:${siteMeta.contactEmail}`,
@@ -50,25 +43,6 @@ function ContactIcon({ type }) {
       >
         in
       </span>
-    );
-  }
-
-  if (type === 'instagram') {
-    return (
-      <svg aria-hidden="true" className="contact-icon-svg contact-icon-svg--instagram" viewBox="0 0 24 24">
-        <rect
-          height="15.5"
-          rx="4.75"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          width="15.5"
-          x="4.25"
-          y="4.25"
-        />
-        <circle cx="12" cy="12" r="3.7" fill="none" stroke="currentColor" strokeWidth="1.8" />
-        <circle cx="16.9" cy="7.1" fill="currentColor" r="1.15" />
-      </svg>
     );
   }
 

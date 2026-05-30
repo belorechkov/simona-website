@@ -31,36 +31,6 @@ export default function HomePage() {
                   in
                 </span>
               </a>
-              <a
-                aria-label="Instagram"
-                className="hero__social-link"
-                href={siteMeta.contactInstagramUrl}
-              >
-                <svg
-                  aria-hidden="true"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
-                    height="15.5"
-                    rx="4.75"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    width="15.5"
-                    x="4.25"
-                    y="4.25"
-                  />
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="3.7"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                  />
-                  <circle cx="16.9" cy="7.1" fill="currentColor" r="1.15" />
-                </svg>
-              </a>
               <Link aria-label="Contact page" className="hero__social-link" to="/contact">
                 <svg
                   aria-hidden="true"

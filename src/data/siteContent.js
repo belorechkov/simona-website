@@ -25,9 +25,8 @@ export const siteMeta = {
   contactImageAlt:
     'Courtyard eco building with planting and warm natural light.',
   contactEmail: 'simona.taseva.arch@gmail.com',
-  contactInstagramUrl: 'https://www.instagram.com/simona.taseva/',
-  contactLinkedInLabel: 'linkedin.com/in/simona-taseva',
-  contactLinkedInUrl: 'https://www.linkedin.com/in/simona-taseva',
+  contactLinkedInLabel: 'linkedin.com/in/simona-taseva-b00a16200',
+  contactLinkedInUrl: 'https://www.linkedin.com/in/simona-taseva-b00a16200/',
   location: 'Sofia, Bulgaria',
 };
 
