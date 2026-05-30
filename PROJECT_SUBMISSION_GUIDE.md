@@ -152,51 +152,6 @@ Gallery image 4: gallery-4.jpg
 - Use clear, high-resolution exports
 - Avoid screenshots with UI around them unless they are intentional diagrams
 
-## Example Filled Project
-
-```md
-Title: Eco Village Residence
-Slug: eco-village-residence
-Category: Academic
-Year: 2025
-Location: Balkan Mountains, Bulgaria
-Role: Lead Architectural Designer
-Tools: Rhino, Grasshopper, ClimateStudio, Adobe InDesign
-Keywords: Passive Design, Landscape Integration, Low-Impact Housing
-Tags: Academic, Sustainability, Research-Oriented
-
-Short Description:
-A clustered housing proposal that merges terraced living with water-sensitive landscape systems.
-
-Overview:
-Eco Village Residence explores housing as an ecological settlement model. The project tests how clustered residential typologies can preserve landscape continuity while encouraging community life and reducing operational energy demand.
-
-Concept:
-The concept organizes housing volumes along contour-responsive terraces, creating a sequence of shared gardens, shaded pathways, and planted thresholds. Instead of imposing a rigid object on the site, the architecture follows the existing landscape logic.
-
-Sustainability / Research Focus:
-The proposal prioritizes passive solar orientation, thermal buffering, stormwater retention, productive planting, and compact material systems. The project also studies how density can coexist with landscape regeneration rather than replacing it.
-
-Reflection:
-This project reinforced my interest in architectural systems that are both environmentally performative and socially grounded. It also shaped my research direction toward climate adaptation through spatial design.
-
-Featured on Homepage:
-Yes
-
-Image Notes:
-Hero image: hero.jpg
-Gallery image 1: gallery-1.jpg
-Gallery image 2: gallery-2.jpg
-Gallery image 3: gallery-3.jpg
-Gallery image 4: gallery-4.jpg
-
-Optional Gallery Captions:
-Gallery image 1: Atmospheric perspective
-Gallery image 2: Site strategy diagram
-Gallery image 3: Sectional spatial study
-Gallery image 4: Material and planting detail
-```
-
 ## Best Way To Share Everything
 
 The easiest delivery format is:
@@ -243,4 +198,3 @@ These are optional, but useful.
 - It is fine if some projects are more academic and others are more professional
 - If you are unsure about a field, leave it blank and it can be completed later
 - If a project has fewer than 4 images, that is completely fine
-

@@ -5,7 +5,7 @@ import { getFeaturedProjects } from '../data/projects';
 import { focusPillars, siteMeta } from '../data/siteContent';
 
 export default function HomePage() {
-  const featuredProjects = getFeaturedProjects();
+  const featuredProjects = getFeaturedProjects().slice(0, 3);
 
   return (
     <>

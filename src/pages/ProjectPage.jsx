@@ -3,7 +3,9 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import ProjectVisual from '../components/ProjectVisual';
 import { getProjectBySlug, projects } from '../data/projects';
 
-function getVariantCaption(variant) {
+function getVariantCaption(item) {
+  const variant = typeof item === 'string' ? item : item?.variant;
+
   if (variant === 'hero') {
     return 'Atmospheric perspective';
   }
@@ -52,8 +54,11 @@ function ProjectVisualFrame({
   className,
   decoding = 'auto',
   fetchPriority,
+  src,
 }) {
-  if (variant === 'hero' && project.heroImage) {
+  const imageSrc = src || (variant === 'hero' ? project.heroImage : '');
+
+  if (imageSrc) {
     return (
       <img
         alt={alt}
@@ -61,7 +66,7 @@ function ProjectVisualFrame({
         decoding={decoding}
         draggable={false}
         fetchPriority={fetchPriority}
-        src={project.heroImage}
+        src={imageSrc}
       />
     );
   }
@@ -351,6 +356,7 @@ function ProjectLightbox({
                   className="project-lightbox__image"
                   decoding="async"
                   project={project}
+                  src={activeItem.src}
                   variant={activeItem.variant}
                 />
               </div>
@@ -417,17 +423,48 @@ export default function ProjectPage() {
 
   const nextProject =
     projects[(projects.findIndex((item) => item.slug === project.slug) + 1) % projects.length];
-  const visualItems = useMemo(
+  const galleryItems = useMemo(
     () =>
-      project.gallery.map((variant, index) => ({
-        id: `${variant}-${index}`,
-        variant,
-        caption: getVariantCaption(variant),
-      })),
+      project.gallery.map((item, index) => {
+        if (typeof item === 'string') {
+          return {
+            id: `${item}-${index}`,
+            variant: item,
+            caption: getVariantCaption(item),
+          };
+        }
+
+        return {
+          id: item.id || `image-${index + 1}`,
+          variant: item.variant || `image-${index + 1}`,
+          src: item.src,
+          thumbnail: item.thumbnail || item.src,
+          caption: item.caption || `Project visual ${index + 1}`,
+        };
+      }),
     [project.gallery],
   );
-  const heroIndex = visualItems.findIndex((item) => item.variant === 'hero');
-  const resolvedHeroIndex = heroIndex >= 0 ? heroIndex : 0;
+  const visualItems = useMemo(
+    () => [
+      {
+        id: 'hero',
+        variant: 'hero',
+        src: project.heroImage,
+        thumbnail: project.image || project.heroImage,
+        caption: 'Project hero image',
+      },
+      ...galleryItems,
+    ],
+    [galleryItems, project.heroImage, project.image],
+  );
+  const resolvedHeroIndex = 0;
+  const detailSections = [
+    ['Overview', project.overview],
+    ['Concept', project.concept],
+    ['Functions', project.functions],
+    ['Architectural Solution', project.architecturalSolution],
+    ['Sustainability / Research Focus', project.sustainabilityFocus],
+  ].filter(([, content]) => content);
 
   function openLightbox(index) {
     setActiveLightboxIndex(index);
@@ -479,30 +516,39 @@ export default function ProjectPage() {
                 decoding="async"
                 fetchPriority="high"
                 project={project}
+                src={project.heroImage}
                 variant="hero"
               />
             </button>
+            {project.presentationBoard ? (
+              <a
+                className="button button--solid project-sheet__board-link"
+                href={project.presentationBoard}
+                rel="noreferrer"
+                target="_blank"
+              >
+                View Presentation Board
+              </a>
+            ) : null}
           </div>
         </section>
 
         <section className="content-section">
           <div className="detail-grid">
-            <article className="detail-card">
-              <h2>Overview</h2>
-              <p>{project.overview}</p>
-            </article>
-            <article className="detail-card">
-              <h2>Concept</h2>
-              <p>{project.concept}</p>
-            </article>
-            <article className="detail-card detail-card--wide">
-              <h2>Sustainability / Research Focus</h2>
-              <p>{project.sustainabilityFocus}</p>
-            </article>
+            {detailSections.map(([title, content], index) => (
+              <article
+                className={`detail-card ${index > 1 ? 'detail-card--wide' : ''}`}
+                key={title}
+              >
+                <h2>{title}</h2>
+                <p>{content}</p>
+              </article>
+            ))}
           </div>
         </section>
 
-        <section className="content-section">
+        {galleryItems.length ? (
+          <section className="content-section">
           <div className="gallery-heading">
             <p className="eyebrow">Selected visuals</p>
             <h2 className="project-gallery__title">
@@ -510,11 +556,11 @@ export default function ProjectPage() {
             </h2>
           </div>
           <div className="visual-gallery">
-            {visualItems.map((item, index) => (
+            {galleryItems.map((item, index) => (
               <figure className="gallery-card" key={item.id}>
                 <button
                   className="gallery-card__visual gallery-card__trigger"
-                  onClick={() => openLightbox(index)}
+                  onClick={() => openLightbox(index + 1)}
                   type="button"
                 >
                   <ProjectVisualFrame
@@ -522,6 +568,7 @@ export default function ProjectPage() {
                     className="gallery-card__image"
                     decoding="async"
                     project={project}
+                    src={item.thumbnail || item.src}
                     variant={item.variant}
                   />
                 </button>
@@ -530,6 +577,7 @@ export default function ProjectPage() {
             ))}
           </div>
         </section>
+        ) : null}
 
         <section className="content-section">
           <article className="reflection-card">
