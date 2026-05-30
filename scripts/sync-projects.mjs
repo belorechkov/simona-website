@@ -127,9 +127,18 @@ async function listProjectFolders() {
   return projects;
 }
 
-async function renameAcademicPdf(projectFolder) {
+async function getPresentationBoardPath(projectFolder, slug) {
   if (projectFolder.categoryFolder !== 'Academic') {
     return null;
+  }
+
+  const outputPath = path.join(outputAssetDir, projectFolder.categoryFolder, slug, `${slug}.pdf`);
+
+  try {
+    await fs.access(outputPath);
+    return outputPath;
+  } catch {
+    // Fall back to the source folder if the board has not been copied yet.
   }
 
   const files = await fs.readdir(projectFolder.folderPath, { withFileTypes: true });
@@ -141,20 +150,11 @@ async function renameAcademicPdf(projectFolder) {
     return null;
   }
 
-  const currentPath = path.join(projectFolder.folderPath, pdfFile.name);
-  const targetPath = path.join(projectFolder.folderPath, `${projectFolder.folderName}.pdf`);
+  const sourcePath = path.join(projectFolder.folderPath, pdfFile.name);
+  await fs.mkdir(path.dirname(outputPath), { recursive: true });
+  await fs.copyFile(sourcePath, outputPath);
 
-  if (currentPath !== targetPath) {
-    try {
-      await fs.rename(currentPath, targetPath);
-    } catch (error) {
-      if (error.code !== 'EEXIST') {
-        throw error;
-      }
-    }
-  }
-
-  return targetPath;
+  return outputPath;
 }
 
 async function optimizeImage(sourcePath, outputPath, width, quality) {
@@ -222,7 +222,7 @@ async function parseProject(projectFolder) {
   const title = basicInfo.Title || projectFolder.folderName;
   const slug = basicInfo.Slug || slugify(title);
   const normalizedCategory = projectFolder.categoryFolder;
-  const pdfPath = await renameAcademicPdf(projectFolder);
+  const pdfPath = await getPresentationBoardPath(projectFolder, slug);
   const images = await getProjectImages(projectFolder, slug);
   const tags = splitCommaList(sectionText(sections, 'TAGS'));
 
