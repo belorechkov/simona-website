@@ -5,10 +5,10 @@ export const siteMeta = {
     'I design sustainable, climate-adaptive environments that connect architecture, ecology, and community wellbeing.',
   heroNote:
     'Architecture grounded in research, ecological performance, and thoughtful urban resilience.',
-  heroImage: '/images/hero-sustainable-architecture-terrace.png',
+  heroImage: '/images/hero-sustainable-architecture-terrace.webp',
   heroImageAlt:
     'Terraced sustainable architecture overlooking a hillside cityscape.',
-  aboutPortraitImage: '/images/about-portrait.png',
+  aboutPortraitImage: '/images/about-portrait.webp',
   aboutPortraitAlt:
     'Portrait placeholder for Simona Taseva.',
   aboutProfile:
@@ -21,7 +21,7 @@ export const siteMeta = {
     'I am currently shaping a portfolio for PhD applications centered on sustainable architecture, climate-adaptive design, smart green infrastructure, urban resilience, and research-oriented design practice.',
   contactLead:
     "I am currently open to PhD opportunities related to sustainable architecture, climate-adaptive design, smart green infrastructure, and urban resilience.",
-  contactImage: '/images/project-green-community-hub.png',
+  contactImage: '/images/project-green-community-hub.webp',
   contactImageAlt:
     'Courtyard eco building with planting and warm natural light.',
   contactEmail: 'simona.taseva.arch@gmail.com',
