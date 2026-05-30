@@ -104,14 +104,15 @@ export default function AboutPage() {
             <h1 className="about-hero__title">About Me</h1>
             <p className="about-hero__intro">{siteMeta.aboutProfile}</p>
             <p className="about-hero__support">
-              I believe thoughtful design grounded in research and empathy can
-              create built environments that are both environmentally responsive
-              and socially meaningful.
+              Through academic projects, professional work, and my current
+              research direction, I explore how design can respond to real
+              human needs while supporting healthier, greener, and more
+              resilient places.
             </p>
             <p className="about-hero__note">
               Design with nature.
               <br />
-              Research for impact.
+              Research for people.
               <br />
               Build resilient futures.
             </p>

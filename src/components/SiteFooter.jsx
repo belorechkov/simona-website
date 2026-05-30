@@ -15,8 +15,8 @@ export default function SiteFooter() {
         <div className="footer-brand">
           <p className="footer-brand__name">{siteMeta.name}</p>
           <p className="footer-brand__text">
-            Sustainable architecture, climate-adaptive design, and resilient
-            urban research.
+            Sustainable architecture, climate-adaptive urban design, and
+            resilient urban research.
           </p>
         </div>
 

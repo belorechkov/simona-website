@@ -2,7 +2,7 @@ export const siteMeta = {
   name: 'Simona Taseva',
   subtitle: 'Architect | Sustainable Architecture & Urban Research',
   intro:
-    'I design sustainable, climate-adaptive environments that connect architecture, ecology, and community wellbeing.',
+    'Architecture shapes how we live, feel, and connect. My work explores spaces that respond to climate, support everyday life, and bring people closer to nature.',
   heroNote:
     'Architecture grounded in research, ecological performance, and thoughtful urban resilience.',
   heroImage: '/images/hero-sustainable-architecture-terrace.webp',
@@ -12,15 +12,15 @@ export const siteMeta = {
   aboutPortraitAlt:
     'Portrait placeholder for Simona Taseva.',
   aboutProfile:
-    'I am a Bulgarian architect with experience in academic design projects, professional coordination, and sustainability-oriented architectural work. My interests focus on the relationship between buildings, landscapes, and urban systems, especially in the context of climate adaptation, green infrastructure, and long-term quality of life. I am currently developing my academic direction toward PhD research in sustainable architecture, climate-adaptive design, smart green infrastructure, and urban resilience.',
+    'I am a Bulgarian architect interested in how architecture shapes the way people live, feel, move, and connect with their environment. My work focuses on sustainable architecture, climate-adaptive design, green infrastructure, and the relationship between buildings, landscapes, and urban systems.',
   aboutAcademic:
-    'My academic interests explore how sustainable architecture can respond to climate uncertainty through passive systems, green-blue infrastructure, and adaptable spatial strategies.',
+    'My academic interests focus on sustainable urbanism, climate-adaptive design, green-blue infrastructure, passive environmental strategies, and the role of architecture in improving everyday urban life.',
   aboutExperience:
-    'Across academic and professional work, I have developed projects that span housing, civic programs, and urban-scale interventions, with a strong emphasis on context, material responsibility, and long-term resilience.',
+    'My professional experience combines architectural design, residential development, project coordination, and work across different stages of the building process - from concept and documentation to construction and delivery.',
   aboutDirection:
-    'I am currently shaping a portfolio for PhD applications centered on sustainable architecture, climate-adaptive design, smart green infrastructure, urban resilience, and research-oriented design practice.',
+    'I am currently developing my path toward PhD research in sustainable architecture, urban resilience, smart green infrastructure, and design approaches that connect climate, ecology, and community wellbeing.',
   contactLead:
-    "I am currently open to PhD opportunities related to sustainable architecture, climate-adaptive design, smart green infrastructure, and urban resilience.",
+    'I am open to research, academic, and design opportunities related to sustainable architecture, climate-adaptive design, smart green infrastructure, and urban resilience.',
   contactImage: '/images/project-green-community-hub.webp',
   contactImageAlt:
     'Courtyard eco building with planting and warm natural light.',
@@ -45,17 +45,17 @@ export const focusPillars = [
   {
     title: 'Ecology as Structure',
     description:
-      'Designing architecture that treats landscape systems, water cycles, and biodiversity as core spatial drivers.',
+      'Designing architecture where landscape, water, vegetation, and biodiversity are treated as core parts of the project.',
   },
   {
     title: 'Research Through Design',
     description:
-      'Using architectural proposals as a way to test adaptive, measurable, and socially responsive ideas.',
+      'Using architectural projects to explore sustainability, spatial quality, environmental performance, and everyday human experience.',
   },
   {
     title: 'Resilient Urban Futures',
     description:
-      'Linking building-scale interventions to wider questions of climate adaptation, public space, and urban wellbeing.',
+      'Connecting building-scale design with wider questions of climate adaptation, public space, housing, and community wellbeing.',
   },
 ];
 

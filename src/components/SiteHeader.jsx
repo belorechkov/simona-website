@@ -22,7 +22,7 @@ export default function SiteHeader() {
       <div className="container header-inner">
         <NavLink className="brand" to="/">
           <span className="brand__name">{siteMeta.name}</span>
-          <span className="brand__role">Architect • Researcher</span>
+          <span className="brand__role">ARCHITECT • RESEARCHER</span>
         </NavLink>
 
         <button

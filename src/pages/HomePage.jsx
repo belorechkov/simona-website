@@ -13,7 +13,7 @@ export default function HomePage() {
       <div className="page-frame page-frame--home page-frame--hero">
         <section className="hero hero--home">
           <div className="hero__copy hero__copy--home">
-            <p className="eyebrow">Warm, resilient, research-led architecture</p>
+            <p className="eyebrow">SUSTAINABLE ARCHITECTURE & URBAN RESEARCH</p>
             <h1 className="hero__title">{siteMeta.name}</h1>
             <p className="hero__subtitle">{siteMeta.subtitle}</p>
             <p className="hero__lead">{siteMeta.intro}</p>
@@ -126,9 +126,9 @@ export default function HomePage() {
         <div className="split-panel split-panel--approach">
           <div className="split-panel__intro split-panel__intro--approach">
             <PageIntro
-              eyebrow="Design approach"
+              eyebrow="DESIGN APPROACH"
               title="Architecture shaped by climate, community, and ecology"
-              description="My work connects spatial design with environmental performance, urban thinking, and research-led inquiry, translating sustainability into clear, well-crafted architectural proposals."
+              description="My work explores how architecture can improve the way people live, move, gather, and experience their everyday environment. I am interested in design that treats landscape, water, vegetation, and public space as essential parts of healthier and more resilient places."
             />
           </div>
 
