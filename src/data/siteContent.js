@@ -5,9 +5,12 @@ export const siteMeta = {
     'Architecture shapes how we live, feel, and connect. My work explores spaces that respond to climate, support everyday life, and bring people closer to nature.',
   heroNote:
     'Architecture grounded in research, ecological performance, and thoughtful urban resilience.',
-  heroImage: '/images/hero-sustainable-architecture-terrace.webp',
+  heroImage: '/images/hero.webp',
+  heroImageSrcSet:
+    '/images/hero-900.webp 900w, /images/hero-1400.webp 1400w, /images/hero.webp 1672w',
+  heroImageSizes: '(max-width: 720px) 100vw, (max-width: 1200px) 70vw, 1200px',
   heroImageAlt:
-    'Terraced sustainable architecture overlooking a hillside cityscape.',
+    'Sustainable architecture surrounded by greenery and warm natural light.',
   aboutPortraitImage: '/images/about-portrait.webp',
   aboutPortraitAlt:
     'Portrait placeholder for Simona Taseva.',
@@ -21,9 +24,9 @@ export const siteMeta = {
     'I am currently developing my path toward PhD research in sustainable architecture, urban resilience, smart green infrastructure, and design approaches that connect climate, ecology, and community wellbeing.',
   contactLead:
     'I am open to research, academic, and design opportunities related to sustainable architecture, climate-adaptive design, smart green infrastructure, and urban resilience.',
-  contactImage: '/images/project-green-community-hub.webp',
+  contactImage: '/project-assets/Academic/eco-village-malo-buchino/image-1.webp',
   contactImageAlt:
-    'Courtyard eco building with planting and warm natural light.',
+    'Eco village architecture with landscape-integrated sustainable design.',
   contactEmail: 'simona.taseva.arch@gmail.com',
   contactLinkedInLabel: 'linkedin.com/in/simona-taseva-b00a16200',
   contactLinkedInUrl: 'https://www.linkedin.com/in/simona-taseva-b00a16200/',

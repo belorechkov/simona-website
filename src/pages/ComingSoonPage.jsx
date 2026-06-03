@@ -68,7 +68,12 @@ export default function ComingSoonPage() {
         </div>
 
         <div className="coming-soon__visual" aria-hidden="true">
-          <ProgressiveImage alt="" src={siteMeta.heroImage} />
+          <ProgressiveImage
+            alt=""
+            sizes={siteMeta.heroImageSizes}
+            src={siteMeta.heroImage}
+            srcSet={siteMeta.heroImageSrcSet}
+          />
         </div>
       </section>
     </main>

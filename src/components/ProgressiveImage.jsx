@@ -18,7 +18,9 @@ export default function ProgressiveImage({
   fetchPriority,
   loading,
   placeholderSrc,
+  sizes,
   src,
+  srcSet,
 }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const resolvedPlaceholderSrc = useMemo(
@@ -50,7 +52,9 @@ export default function ProgressiveImage({
         fetchPriority={fetchPriority}
         loading={loading}
         onLoad={() => setIsLoaded(true)}
+        sizes={sizes}
         src={src}
+        srcSet={srcSet}
       />
     </span>
   );

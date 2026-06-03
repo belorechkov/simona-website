@@ -68,7 +68,10 @@ export default function HomePage() {
                   className="hero__photo hero__photo--home"
                   decoding="async"
                   fetchPriority="high"
+                  placeholderSrc=""
+                  sizes={siteMeta.heroImageSizes}
                   src={siteMeta.heroImage}
+                  srcSet={siteMeta.heroImageSrcSet}
                 />
               </div>
             </div>
