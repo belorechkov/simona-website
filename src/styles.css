@@ -1412,6 +1412,143 @@ button {
   font-size: 0.95rem;
 }
 
+.project-documents {
+  scroll-margin-top: 7rem;
+}
+
+.document-browser__heading {
+  display: grid;
+  gap: 1rem;
+  align-items: end;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin-bottom: 1.45rem;
+}
+
+.document-browser__description {
+  max-width: 54rem;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.document-browser__count {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(127, 146, 117, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.36);
+  color: var(--olive-deep);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.document-grid {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.document-card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 0.72rem;
+  min-height: 15.8rem;
+  padding: 1.15rem;
+  overflow: hidden;
+  border: 1px solid rgba(47, 47, 43, 0.08);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.54), rgba(255, 255, 255, 0.24)),
+    rgba(238, 228, 214, 0.7);
+  color: inherit;
+  text-align: left;
+  box-shadow: 0 10px 22px rgba(88, 78, 63, 0.07);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.document-card::before {
+  content: '';
+  position: absolute;
+  right: -2.25rem;
+  top: -2.85rem;
+  z-index: -1;
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  background: rgba(168, 183, 154, 0.16);
+}
+
+.document-card:hover,
+.document-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(127, 146, 117, 0.28);
+  box-shadow: 0 18px 32px rgba(88, 78, 63, 0.1);
+}
+
+.document-card--featured {
+  grid-column: span 2;
+  background:
+    radial-gradient(circle at 88% 6%, rgba(168, 183, 154, 0.28), transparent 34%),
+    linear-gradient(135deg, rgba(238, 228, 214, 0.92), rgba(255, 255, 255, 0.46));
+}
+
+.document-card__topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.document-card__index,
+.document-card__group,
+.document-card__action {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.document-card__index {
+  color: rgba(47, 47, 43, 0.38);
+}
+
+.document-card__group {
+  color: var(--olive-deep);
+  text-align: right;
+}
+
+.document-card__title {
+  max-width: 22rem;
+  margin-top: 0.1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.35rem, 2.1vw, 1.82rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.document-card__description {
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+.document-card__action {
+  align-self: end;
+  width: max-content;
+  margin-top: auto;
+  padding-bottom: 0.18rem;
+  border-bottom: 1px solid rgba(127, 146, 117, 0.42);
+  color: var(--olive-deep);
+}
+
 .reflection-card {
   display: grid;
   gap: 1rem;
@@ -1453,7 +1590,30 @@ button {
   border-radius: 24px;
   background: rgba(246, 241, 232, 0.96);
   box-shadow: 0 24px 50px rgba(20, 18, 16, 0.28);
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.project-lightbox__panel:fullscreen,
+.project-document-viewer__panel:fullscreen {
+  width: 100vw;
+  height: 100dvh;
+  max-height: none;
+  border-radius: 0;
+}
+
+.project-lightbox__panel:fullscreen .project-lightbox__viewport {
+  padding: 0.35rem 4.1rem 0.35rem;
+}
+
+.project-lightbox__panel:fullscreen .project-lightbox__image-shell {
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+}
+
+.project-lightbox__panel:fullscreen .project-lightbox__image {
+  width: 100%;
+  height: 100%;
 }
 
 .project-lightbox__viewport {
@@ -1463,7 +1623,7 @@ button {
   overflow: hidden;
   display: grid;
   align-items: center;
-  padding: 1.25rem 3.7rem 0.35rem;
+  padding: 0.35rem 3.7rem 0.35rem;
 }
 
 .project-lightbox__media {
@@ -1484,11 +1644,11 @@ button {
   border: none;
   background: transparent;
   cursor: zoom-in;
+  touch-action: none;
 }
 
 .project-lightbox__image-button.is-pannable {
   cursor: grab;
-  touch-action: none;
 }
 
 .project-lightbox__image-button.is-dragging {
@@ -1550,8 +1710,6 @@ button {
 
 .project-lightbox__close,
 .project-lightbox__nav {
-  position: absolute;
-  z-index: 3;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1561,15 +1719,12 @@ button {
 }
 
 .project-lightbox__close {
-  top: 0.9rem;
-  right: 0.9rem;
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  flex: 0 0 auto;
 }
 
 .project-lightbox__nav {
+  position: absolute;
+  z-index: 3;
   top: 50%;
   transform: translateY(-50%);
   font-size: 1.4rem;
@@ -1584,34 +1739,33 @@ button {
   right: 1rem;
 }
 
-.project-lightbox__footer {
-  position: relative;
-  z-index: 2;
+.project-lightbox__header {
   display: flex;
   flex-wrap: wrap;
-  align-items: end;
+  align-items: start;
   justify-content: space-between;
-  gap: 1rem 1.25rem;
-  padding: 0 0.25rem 0.2rem;
+  gap: 1rem;
+  padding: 0.2rem 0.25rem 0;
 }
 
 .project-lightbox__meta {
   display: grid;
-  gap: 0.35rem;
+  gap: 0.4rem;
 }
 
 .project-lightbox__meta .eyebrow {
-  margin: 0;
+  margin-bottom: 0;
 }
 
-.project-lightbox__caption {
+.project-lightbox__meta h2 {
   margin: 0;
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  line-height: 1.18;
-  color: var(--text);
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
 }
 
+.project-lightbox__actions,
 .project-lightbox__controls {
   display: inline-flex;
   align-items: center;
@@ -1631,6 +1785,11 @@ button {
 .project-lightbox__control--label {
   min-width: 4.2rem;
   font-size: 0.92rem;
+}
+
+.project-lightbox__control--fullscreen {
+  min-width: 2.8rem;
+  padding-inline: 0.8rem;
 }
 
 .project-lightbox__close:hover,
@@ -1653,6 +1812,206 @@ button {
 .project-lightbox__control:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+}
+
+.project-document-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 320;
+  display: grid;
+  place-items: center;
+  padding: 1.2rem;
+  background: rgba(33, 30, 25, 0.78);
+  backdrop-filter: blur(8px);
+}
+
+.project-document-viewer__panel {
+  display: grid;
+  gap: 0.95rem;
+  width: min(100%, 84rem);
+  height: min(58rem, calc(100dvh - 2.4rem));
+  min-height: 0;
+  padding: 1rem;
+  border: 1px solid rgba(246, 241, 232, 0.14);
+  border-radius: 24px;
+  background: rgba(246, 241, 232, 0.97);
+  box-shadow: 0 24px 50px rgba(20, 18, 16, 0.28);
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.project-document-viewer__header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.2rem 0.25rem 0;
+}
+
+.project-document-viewer__header .eyebrow {
+  margin-bottom: 0.4rem;
+}
+
+.project-document-viewer__header h2 {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.project-document-viewer__actions,
+.project-document-viewer__zoom-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.project-document-viewer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2.85rem;
+  height: 2.85rem;
+  border: 1px solid rgba(47, 47, 43, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--text);
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+.project-document-viewer__control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.55rem;
+  min-height: 2.55rem;
+  padding: 0 0.75rem;
+  border: 1px solid rgba(47, 47, 43, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+.project-document-viewer__control--label {
+  min-width: 4rem;
+  font-size: 0.86rem;
+}
+
+.project-document-viewer__control--fullscreen {
+  min-width: 2.55rem;
+  padding-inline: 0.75rem;
+}
+
+.fullscreen-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.close-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.project-document-viewer__close:hover,
+.project-document-viewer__close:focus-visible,
+.project-document-viewer__control:hover,
+.project-document-viewer__control:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(127, 146, 117, 0.34);
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--olive-deep);
+}
+
+.project-document-viewer__control:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.project-document-viewer__frame {
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(47, 47, 43, 0.1);
+  border-radius: 18px;
+  background: #f7f3eb;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32);
+}
+
+.pdf-canvas-viewer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 1rem;
+  background: #fff;
+  cursor: zoom-in;
+  touch-action: none;
+}
+
+.pdf-canvas-viewer.is-zoomed {
+  cursor: grab;
+}
+
+.pdf-canvas-viewer__pages {
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+  width: max-content;
+  min-width: 100%;
+  margin-inline: auto;
+}
+
+.pdf-canvas-viewer__page-shell {
+  position: relative;
+  overflow: hidden;
+  max-width: none;
+  border-radius: 4px;
+  background:
+    linear-gradient(90deg, rgba(246, 241, 232, 0.92), rgba(255, 255, 255, 0.88)),
+    #fff;
+  box-shadow: 0 10px 24px rgba(47, 47, 43, 0.16);
+}
+
+.pdf-canvas-viewer__page {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  background: #fff;
+}
+
+.pdf-canvas-viewer__status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  pointer-events: none;
+  background: rgba(247, 243, 235, 0.76);
+}
+
+.pdf-canvas-viewer__status p {
+  margin: 0;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(47, 47, 43, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
 }
 
 .contact-layout {
@@ -2769,6 +3128,10 @@ button {
     gap: 1.2rem;
   }
 
+  .document-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .contact-stage__visual {
     min-height: 23rem;
   }
@@ -2796,7 +3159,7 @@ button {
     width: 100%;
     height: calc(100dvh - 1.6rem);
     max-height: calc(100dvh - 1.6rem);
-    padding: 3.15rem 0.8rem 0.85rem;
+    padding: 0.8rem;
     gap: 0.7rem;
     border-radius: 20px;
   }
@@ -2819,14 +3182,65 @@ button {
     right: 0.8rem;
   }
 
-  .project-lightbox__footer {
+  .project-lightbox__header {
+    flex-direction: column;
     align-items: start;
-    padding: 0;
+  }
+
+  .project-lightbox__actions {
+    width: 100%;
+    justify-content: space-between;
   }
 
   .project-lightbox__controls {
+    flex-wrap: wrap;
+  }
+
+  .document-browser__heading {
+    align-items: start;
+    grid-template-columns: 1fr;
+  }
+
+  .document-browser__count {
+    width: max-content;
+  }
+
+  .document-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .document-card,
+  .document-card--featured {
+    grid-column: auto;
+  }
+
+  .project-document-viewer {
+    padding: 0.8rem;
+  }
+
+  .project-document-viewer__panel {
+    height: calc(100dvh - 1.6rem);
+    padding: 0.8rem;
+    border-radius: 20px;
+  }
+
+  .project-document-viewer__header {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .project-document-viewer__actions {
     width: 100%;
-    justify-content: flex-end;
+    justify-content: space-between;
+  }
+
+  .project-document-viewer__zoom-controls {
+    flex-wrap: wrap;
+  }
+
+  .project-document-viewer__close {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   .nav-toggle {
@@ -3004,8 +3418,8 @@ button {
     height: 2.5rem;
   }
 
-  .project-lightbox__caption {
-    font-size: 1.08rem;
+  .project-lightbox__meta h2 {
+    font-size: 1.35rem;
   }
 
   .project-lightbox__control {

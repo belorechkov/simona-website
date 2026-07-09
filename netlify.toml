@@ -6,3 +6,9 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/project-assets/**/*.pdf"
+  [headers.values]
+    Content-Disposition = "inline"
+    X-Content-Type-Options = "nosniff"

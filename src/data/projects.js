@@ -1,6 +1,9 @@
 import generatedProjects from './generatedProjects.json';
+import { manualProjects } from './manualProjects';
 
-export const projects = generatedProjects;
+export const projects = [...generatedProjects, ...manualProjects].sort(
+  (a, b) => Number(b.year) - Number(a.year) || a.title.localeCompare(b.title),
+);
 
 export const featuredProjectSlugs = projects
   .filter((project) => project.featured)
